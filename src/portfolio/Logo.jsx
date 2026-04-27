@@ -12,8 +12,8 @@ function Logo({ height = 50 }) {
         textAlign: 'left'
       }}>
         <div style={{ letterSpacing: '-0.03em', color: 'white' }}>
-          <span style={{ color: 'inherit' }}>About</span>
-          <span style={{ color: primary }}>me</span>
+          <span style={{ color: 'inherit' }}>Maqa</span>
+          <span style={{ color: primary }}>Tech</span>
         </div>
 
         <div style={{ 
@@ -22,7 +22,7 @@ function Logo({ height = 50 }) {
           color: '#94a3b8', 
           marginTop: '5px',
           fontWeight: '700'
-        }}>PORTFOLIO PRO</div>
+        }}>SOFTWARE SOLUTIONS</div>
       </div>
     </div>
   )

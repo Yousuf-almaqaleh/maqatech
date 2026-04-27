@@ -1,18 +1,28 @@
-# React + Vite
+# MaqaTech Portfolio 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+موقع تعريفي احترافي للمبرمج **يوسف المقالح**، يعرض الخبرات والمهارات البرمجية وحلول MaqaTech الرقمية.
 
-Currently, two official plugins are available:
+## 🌟 المميزات
+- **تصميم عصري (Premium Design)**: استخدام Glassmorphism وGradients وAnimations.
+- **دعم اللغتين (Bilingual Support)**: يدعم العربية والإنجليزية مع تحويل كامل للاتجاه (RTL/LTR).
+- **حماية العين (Eye Protection Mode)**: وضع خاص لتقليل إجهاد العين.
+- **متجاوب (Responsive)**: يعمل بكفاءة على جميع الشاشات.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 التقنيات المستخدمة
+- **React.js / Vite**
+- **Vanilla CSS** (تصميم مخصص بالكامل)
+- **React Router**
 
-## React Compiler
+## 📂 هيكلة المشروع
+- `src/portfolio/PortfolioApp.jsx`: المكون الرئيسي للتطبيق.
+- `src/portfolio/portfolio.css`: ملف التنسيق الشامل.
+- `src/portfolio/Logo.jsx`: شعار MaqaTech البرمجي.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 التشغيل المحلي
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-# maqatech
+---
+© 2026 MaqaTech Software Solutions. All rights reserved.

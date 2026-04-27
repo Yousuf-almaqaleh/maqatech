@@ -10,7 +10,7 @@ const translations = {
 
     hero: { 
       tag: 'مبرمج ومطور حلول رقمية', 
-      title: '', 
+      title: 'نصمم ونطور حلولاً ذكية لمستقبل رقمي أفضل', 
       desc: 'أهلاً بك، أنا يوسف المقالح. متخصص في بناء أنظمة متكاملة ومواقع ويب عصرية تجمع بين الأداء العالي والتصميم الجذاب.', 
 
       cta1: 'استكشف مشاريعي', 
@@ -46,10 +46,10 @@ const translations = {
       items: [
 
 
-        { title: 'نظام إدارة العيادات الذكي', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
-        { title: 'منصة MaqaTech للتجارة', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
-        { title: 'تطبيق إدارة الموارد', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
-        { title: 'بوابة الخدمات الإلكترونية', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
+        { title: 'نظام إدارة العيادات الذكي', desc: 'حل متكامل لإدارة المرضى والمواعيد والتقارير الطبية بدقة عالية.', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
+        { title: 'منصة MaqaTech للتجارة', desc: 'متجر إلكتروني متكامل يدعم الدفع والتحكم في المخزون وتجربة مستخدم سلسة.', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
+        { title: 'تطبيق إدارة الموارد', desc: 'نظام داخلي لتتبع الأصول والموارد البشرية وتحليل الأداء البرمجي.', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
+        { title: 'بوابة الخدمات الإلكترونية', desc: 'منصة ويب تتيح للمستخدمين الوصول إلى الخدمات الرقمية بسهولة وأمان.', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
       ]
     },
     contact: {
@@ -71,7 +71,7 @@ const translations = {
 
     hero: { 
       tag: 'Full Stack Developer', 
-      title: '', 
+      title: 'Crafting Intelligent Solutions for a Digital Future', 
       desc: 'Hi, I\'m Yousuf Al-Maqaleh. Specializing in building integrated systems and modern websites that combine high performance with stunning design.', 
       cta1: 'Explore Projects', 
       cta2: 'Contact Now' 
@@ -106,10 +106,10 @@ const translations = {
       items: [
 
 
-        { title: 'Smart Clinic System', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
-        { title: 'MaqaTech Commerce', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
-        { title: 'Resource Management', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
-        { title: 'E-Services Portal', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
+        { title: 'Smart Clinic System', desc: 'An integrated solution for managing patients, appointments, and medical reports with high accuracy.', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
+        { title: 'MaqaTech Commerce', desc: 'A full-featured e-commerce platform supporting payments, inventory control, and seamless UX.', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
+        { title: 'Resource Management App', desc: 'An internal system for tracking assets, human resources, and performance analytics.', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
+        { title: 'E-Services Portal', desc: 'A web platform providing users with easy and secure access to various digital services.', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
       ]
     },
     contact: {
@@ -341,6 +341,7 @@ function PortfolioApp() {
                   </div>
                   <div className="project-body">
                     <h3 className="card-title" style={{ fontSize: '1.3rem' }}>{p.title}</h3>
+                    <p className="card-desc" style={{ marginTop: '10px' }}>{p.desc}</p>
                     <div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>
                       {p.tech.map((tag, j) => <span key={j} className="tag">{tag}</span>)}
                     </div>
