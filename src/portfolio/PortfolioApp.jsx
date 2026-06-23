@@ -1,550 +1,315 @@
-import { useState, useEffect } from 'react'
-import Logo from './Logo'
+import { useEffect } from 'react'
 import './portfolio.css'
+import heroImg from '../assets/hero-image.png'
 
-const translations = {
-  ar: {
-    dir: 'rtl',
-    nav: { home: 'الرئيسية', skills: 'المهارات', projects: 'المشاريع', contact: 'تواصل معي', lang: 'English' },
+// ─── Owner Info ─────────────────────────────────────────────────────────────
+// Name:      Yousuf Al-Maqaleh / يوسف المقالح
+// WhatsApp:  +967 712 127 541
+// Email:     yousuf.almaqaleh@gmail.com
+// ─────────────────────────────────────────────────────────────────────────────
 
-
-    hero: { 
-      tag: 'مبرمج ومطور حلول رقمية', 
-      title: 'نصمم ونطور حلولاً ذكية لمستقبل رقمي أفضل', 
-      desc: 'أهلاً بك، أنا يوسف المقالح. متخصص في بناء أنظمة متكاملة ومواقع ويب عصرية تجمع بين الأداء العالي والتصميم الجذاب.', 
-
-      cta1: 'استكشف مشاريعي', 
-      cta2: 'تواصل الآن' 
-    },
-    skills: { 
-      title: 'المهارات والخبرات', 
-      sub: 'أدوات وتقنيات نتقنها لنحول رؤيتك إلى واقع ملموس.', 
-      languages: [
-        { name: 'العربية', level: 'اللغة الأم', percent: '100%' },
-        { name: 'الإنجليزية', level: 'مستوى متقدم', percent: '85%' },
-      ],
-      tech: [
-        { name: 'JavaScript', level: '95%' },
-        { name: 'Python', level: '90%' },
-        { name: 'React / Next.js', level: '92%' },
-        { name: 'Node.js', level: '88%' },
-        { name: 'SQL / PostgreSQL', level: '85%' },
-        { name: 'C# / .NET', level: '80%' },
-      ],
-      items: [
-
-        { icon: '🚀', title: 'تطوير الويب', desc: 'بناء واجهات تفاعلية باستخدام React و Next.js مع التركيز على تجربة المستخدم.' },
-        { icon: '⚙️', title: 'هندسة الأنظمة', desc: 'تصميم وبناء قواعد بيانات معقدة وأنظمة خلفية قوية باستخدام Node.js و Python.' },
-        { icon: '🎨', title: 'تصميم الواجهات', desc: 'خلق تصاميم عصرية وجذابة تعكس هوية علامتك التجارية بدقة.' },
-        { icon: '📱', title: 'تطبيقات الهاتف', desc: 'تطوير تطبيقات سلسة وسريعة تعمل على مختلف أنظمة التشغيل.' }
-      ]
-    },
-
-    projects: { 
-      title: 'أعمالي المميزة', 
-      sub: 'مجموعة من التحديات التي تحولت إلى نجاحات برمجية.', 
-      items: [
-
-
-        { title: 'نظام إدارة العيادات الذكي', desc: 'حل متكامل لإدارة المرضى والمواعيد والتقارير الطبية بدقة عالية.', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
-        { title: 'منصة MaqaTech للتجارة', desc: 'متجر إلكتروني متكامل يدعم الدفع والتحكم في المخزون وتجربة مستخدم سلسة.', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
-        { title: 'تطبيق إدارة الموارد', desc: 'نظام داخلي لتتبع الأصول والموارد البشرية وتحليل الأداء البرمجي.', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
-        { title: 'بوابة الخدمات الإلكترونية', desc: 'منصة ويب تتيح للمستخدمين الوصول إلى الخدمات الرقمية بسهولة وأمان.', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
-      ]
-    },
-    contact: {
-      title: 'لنبدأ العمل معاً',
-      desc: 'هل لديك فكرة مشروع؟ دعنا نحولها إلى واقع.',
-      email: 'البريد الإلكتروني',
-
-      phone: 'رقم الهاتف',
-      location: 'الموقع',
-      locVal: 'صنعاء، اليمن'
-    },
-
-    footer: { copy: 'جميع الحقوق محفوظة' }
+// UPDATE: Replace placeholder '#' links below with your real URLs
+const SOCIAL = [
+  {
+    label: 'LinkedIn',
+    // UPDATE: add your LinkedIn link here
+    href: 'https://linkedin.com/in/yousuf-almaqaleh',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+      </svg>
+    ),
   },
-  en: {
-    dir: 'ltr',
-    nav: { home: 'Home', skills: 'Skills', projects: 'Projects', contact: 'Contact', lang: 'العربية' },
+  {
+    label: 'Instagram',
+    // UPDATE: add your Instagram link here
+    href: 'https://instagram.com/yousuf.almaqaleh',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/967712127541',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'GitHub',
+    // UPDATE: add your GitHub link here
+    href: 'https://github.com/yousuf-almaqaleh',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+    ),
+  },
+]
 
+// UPDATE: Replace '#' with your real project URLs
+const PROJECTS = [
+  {
+    titleAr: 'نظام إدارة العيادات الذكي',
+    titleEn: 'Smart Clinic System',
+    descAr: 'حل متكامل لإدارة المرضى والمواعيد والتقارير الطبية بدقة عالية.',
+    descEn: 'Integrated patient management, appointments, and medical reporting built with Python and SQL.',
+    link: '#', // UPDATE: add your project link here
+  },
+  {
+    titleAr: 'منصة MaqaTech للتجارة',
+    titleEn: 'MaqaTech Commerce',
+    descAr: 'متجر إلكتروني متكامل يدعم الدفع والتحكم في المخزون وتجربة مستخدم سلسة.',
+    descEn: 'Full-featured e-commerce platform with payments, inventory control, and seamless UX.',
+    link: '#', // UPDATE: add your project link here
+  },
+  {
+    titleAr: 'تطبيق إدارة الموارد',
+    titleEn: 'Resource Management App',
+    descAr: 'نظام داخلي لتتبع الأصول والموارد البشرية وتحليل الأداء.',
+    descEn: 'Internal system for tracking assets, human resources, and performance analytics.',
+    link: '#', // UPDATE: add your project link here
+  },
+  {
+    titleAr: 'بوابة الخدمات الإلكترونية',
+    titleEn: 'E-Services Portal',
+    descAr: 'منصة ويب تتيح للمستخدمين الوصول إلى الخدمات الرقمية بسهولة وأمان.',
+    descEn: 'Web platform providing users with easy and secure access to digital services.',
+    link: '#', // UPDATE: add your project link here
+  },
+]
 
-    hero: { 
-      tag: 'Full Stack Developer', 
-      title: 'Crafting Intelligent Solutions for a Digital Future', 
-      desc: 'Hi, I\'m Yousuf Al-Maqaleh. Specializing in building integrated systems and modern websites that combine high performance with stunning design.', 
-      cta1: 'Explore Projects', 
-      cta2: 'Contact Now' 
-    },
-    skills: { 
-      title: 'Skills & Expertise', 
-      sub: 'Tools and technologies we master to turn your vision into reality.', 
-      languages: [
-        { name: 'Arabic', level: 'Native', percent: '100%' },
-        { name: 'English', level: 'Advanced', percent: '85%' },
-      ],
-      tech: [
-        { name: 'JavaScript', level: '95%' },
-        { name: 'Python', level: '90%' },
-        { name: 'React / Next.js', level: '92%' },
-        { name: 'Node.js', level: '88%' },
-        { name: 'SQL / PostgreSQL', level: '85%' },
-        { name: 'C# / .NET', level: '80%' },
-      ],
-      items: [
+const SKILLS = ['React', 'Python', 'HTML', 'CSS', 'JavaScript']
 
-        { icon: '🚀', title: 'Web Development', desc: 'Building interactive interfaces using React and Next.js with a focus on UX.' },
-        { icon: '⚙️', title: 'Systems Engineering', desc: 'Designing and building complex databases and robust backends using Node.js & Python.' },
-        { icon: '🎨', title: 'UI/UX Design', desc: 'Creating modern and attractive designs that reflect your brand identity accurately.' },
-        { icon: '📱', title: 'Mobile Apps', desc: 'Developing smooth and fast applications that work on various operating systems.' }
-      ]
-    },
-
-    projects: { 
-      title: 'Featured Works', 
-      sub: 'A collection of challenges turned into software successes.', 
-      items: [
-
-
-        { title: 'Smart Clinic System', desc: 'An integrated solution for managing patients, appointments, and medical reports with high accuracy.', tech: ['Python', 'SQL', 'Desktop'], emoji: '🏥' },
-        { title: 'MaqaTech Commerce', desc: 'A full-featured e-commerce platform supporting payments, inventory control, and seamless UX.', tech: ['React', 'Node.js', 'PostgreSQL'], emoji: '🛒' },
-        { title: 'Resource Management App', desc: 'An internal system for tracking assets, human resources, and performance analytics.', tech: ['JavaScript', 'API', 'UI/UX'], emoji: '📊' },
-        { title: 'E-Services Portal', desc: 'A web platform providing users with easy and secure access to various digital services.', tech: ['Next.js', 'Tailwind'], emoji: '🌐' },
-      ]
-    },
-    contact: {
-      title: 'Let\'s Work Together',
-      desc: 'Have a project idea? Let\'s make it happen.',
-      email: 'Email',
-
-      phone: 'Phone',
-      location: 'Location',
-      locVal: 'Sana\'a, Yemen'
-    },
-
-    footer: { copy: 'All rights reserved' }
-  }
-}
-
-function PortfolioApp() {
-  const [lang, setLang] = useState('ar')
-  const [scrolled, setScrolled] = useState(false)
-  const [showTopBtn, setShowTopBtn] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [nightMode, setNightMode] = useState(false)
-  const [settingsOpen, setSettingsOpen] = useState(false)
-  const t = translations[lang]
-
-
-  useEffect(() => {
-    document.documentElement.dir = t.dir
-    document.documentElement.lang = lang
-    
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-      setShowTopBtn(window.scrollY > 500)
-    }
-
-    // Scroll Reveal Logic
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible')
-        }
-      })
-    }, { threshold: 0.1 })
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      observer.disconnect()
-    }
-  }, [lang, t.dir])
-
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
-
+function SocialRow({ color }) {
   return (
-    <div className="portfolio-app">
-      {nightMode && <div className="night-mode-overlay"></div>}
-      {/* Background Orbs */}
-
-      <div className="orb orb-1"></div>
-      <div className="orb orb-2"></div>
-
-      <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-inner">
-          <div className="logo-section">
-            <Logo height={50} />
-          </div>
-
-
-          <div className={`nav-menu ${mobileMenuOpen ? 'open' : ''}`}>
-            <ul className="nav-links">
-              <li style={{ position: 'relative' }}>
-                <button className="settings-btn" onClick={() => setSettingsOpen(true)}>
-                  ☰
-                </button>
-                {settingsOpen && (
-                  <>
-                    <div className="settings-overlay" onClick={() => setSettingsOpen(false)}></div>
-                    <div className="settings-sidebar">
-                      <div className="sidebar-header">
-                        <h3>{lang === 'ar' ? 'الإعدادات' : 'Settings'}</h3>
-                        <button className="close-btn" onClick={() => setSettingsOpen(false)}>✕</button>
-                      </div>
-                      <div className="sidebar-content">
-                        <button className="sidebar-action" onClick={() => { setLang(lang === 'ar' ? 'en' : 'ar'); setSettingsOpen(false); }}>
-                          <span className="icon">🌐</span>
-                          <span className="text">{t.nav.lang}</span>
-                        </button>
-                        <button className="sidebar-action" onClick={() => { setNightMode(!nightMode); setSettingsOpen(false); }}>
-                          <span className="icon">👁️</span>
-                          <span className="text">{lang === 'ar' ? 'حماية العين' : 'Eye Protection'}</span>
-                        </button>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </li>
-
-              <li><a href="#home" onClick={() => setMobileMenuOpen(false)}>{t.nav.home}</a></li>
-              <li><a href="#skills" onClick={() => setMobileMenuOpen(false)}>{t.nav.skills}</a></li>
-              <li><a href="#projects" onClick={() => setMobileMenuOpen(false)}>{t.nav.projects}</a></li>
-              <li><a href="#contact" onClick={() => setMobileMenuOpen(false)}>{t.nav.contact}</a></li>
-            </ul>
-
-
-
-          </div>
-
-          <div className="nav-cta">
-            <button className="mobile-toggle" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? '✕' : '☰'}
-            </button>
-          </div>
-
-
-        </div>
-      </nav>
-
-      <main>
-        <section id="home" className="hero reveal">
-          <div className="container">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '80px', flexWrap: 'wrap' }}>
-              <div style={{ flex: '1', minWidth: '320px' }}>
-                <div className="hero-tag">
-                  <span className="pulse"></span>
-                  {t.hero.tag}
-                </div>
-                {t.hero.title && <h1 className="title-reveal">{t.hero.title}</h1>}
-
-                <p>{t.hero.desc}</p>
-                <div className="hero-btns">
-                  <a href="#projects" className="btn btn-primary">{t.hero.cta1}</a>
-                  <a href="#contact" className="btn btn-outline">{t.hero.cta2}</a>
-                </div>
-              </div>
-              <div className="hero-image">
-                <div className="profile-wrap">
-                  <div className="profile-inner">
-                    <Logo height={120} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Language Skills Section */}
-        <section className="section reveal" style={{ paddingTop: '0' }}>
-          <div className="container">
-            <div className="card" style={{ 
-              display: 'flex', alignItems: 'center', gap: '40px', flexWrap: 'wrap', 
-              background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(168, 85, 247, 0.05))',
-              padding: '24px'
-            }}>
-              <div style={{ flex: '1', minWidth: '200px' }}>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '8px' }}>{lang === 'ar' ? 'مهارات اللغة' : 'Language Skills'}</h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{lang === 'ar' ? 'القدرة على التواصل بمستويات احترافية.' : 'Professional communication proficiency.'}</p>
-              </div>
-              <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap', flex: '2' }}>
-                {t.skills.languages.map((l, idx) => (
-                  <div key={idx} style={{ flex: '1', minWidth: '150px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontWeight: '700', fontSize: '0.95rem' }}>{l.name}</span>
-                      <span style={{ color: 'var(--primary)', fontSize: '0.8rem' }}>{l.level}</span>
-                    </div>
-                    <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '10px', overflow: 'hidden' }}>
-                      <div style={{ width: l.percent, height: '100%', background: 'linear-gradient(to right, var(--primary), var(--secondary))' }}></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* Programming Languages Section */}
-        <section className="section reveal" style={{ paddingTop: '0' }}>
-          <div className="container">
-            <div className="text-center" style={{ marginBottom: '40px' }}>
-              <h3 style={{ fontSize: '1.2rem', color: 'var(--primary)', fontWeight: '800', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                {lang === 'ar' ? 'لغات البرمجة والتقنيات' : 'Programming Languages & Tech'}
-              </h3>
-            </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center' }}>
-              {t.skills.tech.map((tech, idx) => (
-                <div key={idx} className="tech-badge">
-                  {tech.name}
-                  <span className="tech-level" style={{ width: tech.level }}></span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="skills" className="section reveal">
-
-          <div className="container">
-
-            <div className="text-center" style={{ marginBottom: '80px' }}>
-              <h2 className="section-title">{t.skills.title}</h2>
-              <p className="section-sub">{t.skills.sub}</p>
-            </div>
-            <div className="grid">
-              {t.skills.items.map((s, i) => (
-                <div key={i} className="card reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
-                  <span className="card-icon">{s.icon}</span>
-                  <h3 className="card-title">{s.title}</h3>
-                  <p className="card-desc">{s.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="projects" className="section reveal">
-          <div className="container">
-            <div className="text-center" style={{ marginBottom: '80px' }}>
-              <h2 className="section-title">{t.projects.title}</h2>
-              <p className="section-sub">{t.projects.sub}</p>
-            </div>
-            <div className="grid">
-              {t.projects.items.map((p, i) => (
-                <div key={i} className="project-card card reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
-                  <div className="project-img">
-                    {p.emoji}
-                  </div>
-                  <div className="project-body">
-                    <h3 className="card-title" style={{ fontSize: '1.3rem' }}>{p.title}</h3>
-                    <p className="card-desc" style={{ marginTop: '10px' }}>{p.desc}</p>
-                    <div style={{ display: 'flex', gap: '8px', marginTop: '16px', flexWrap: 'wrap' }}>
-                      {p.tech.map((tag, j) => <span key={j} className="tag">{tag}</span>)}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="section reveal">
-          <div className="container">
-            <div className="card reveal" style={{ padding: '60px', textAlign: 'center' }}>
-              <h2 className="section-title">{t.contact.title}</h2>
-              <p className="section-sub" style={{ marginBottom: '40px' }}>{t.contact.desc}</p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px' }}>
-                <div className="contact-item">
-                  <div className="contact-label">{t.contact.email}</div>
-                  <div className="contact-value">yousuf.almaqaleh@gmail.com</div>
-                </div>
-                <div className="contact-item">
-                  <div className="contact-label">{t.contact.phone}</div>
-                  <div className="contact-value" dir="ltr">+967 712 127 541</div>
-                </div>
-                <div className="contact-item">
-                  <div className="contact-label">{t.contact.location}</div>
-                  <div className="contact-value">{t.contact.locVal}</div>
-                </div>
-              </div>
-              <div style={{ marginTop: '50px', display: 'flex', justifyContent: 'center', gap: '20px' }}>
-                 <a href="https://wa.me/967712127541" className="btn btn-primary">{lang === 'ar' ? 'مراسلة عبر واتساب' : 'Message via WhatsApp'}</a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="footer">
-        <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '24px', textAlign: 'center' }}>
-            <Logo height={50} />
-            <div className="copyright" style={{ marginTop: '0', paddingTop: '20px', borderTop: '1px solid var(--border)', width: '100%' }}>
-              © {new Date().getFullYear()} Yousuf Al-Maqaleh — {t.footer.copy}
-            </div>
-          </div>
-        </div>
-
-      </footer>
-
-      {/* Floating Action Button */}
-      <button className={`back-to-top ${showTopBtn ? 'visible' : ''}`} onClick={scrollToTop}>
-        ↑
-      </button>
-
-      <style>{`
-        .settings-btn {
-          background: var(--glass); border: 1px solid var(--border);
-          color: white; width: 40px; height: 40px; border-radius: 50%;
-          cursor: pointer; display: flex; align-items: center; justify-content: center;
-          font-size: 1.2rem; transition: all 0.3s;
-        }
-        .settings-btn:hover { background: var(--primary); border-color: var(--primary); }
-        
-        .settings-overlay {
-          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(4px);
-          z-index: 2000; animation: fadeIn 0.3s;
-        }
-        .settings-sidebar {
-          position: fixed; top: 0; left: 0; bottom: 0;
-          width: 300px; background: rgba(15, 23, 42, 0.95);
-          backdrop-filter: blur(20px); border-right: 1px solid var(--border);
-          z-index: 2001; padding: 40px 24px;
-          display: flex; flex-direction: column; gap: 30px;
-          box-shadow: 20px 0 50px rgba(0,0,0,0.5);
-          animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        [dir="rtl"] .settings-sidebar { 
-          left: auto; right: 0; 
-          border-right: none; border-left: 1px solid var(--border); 
-          animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-          box-shadow: -20px 0 50px rgba(0,0,0,0.5);
-        }
-
-        
-        @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-        @keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .sidebar-header h3 { font-size: 1.5rem; font-weight: 800; }
-        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
-        
-        .sidebar-content { display: flex; flex-direction: column; gap: 15px; }
-        .sidebar-action {
-          background: var(--glass); border: 1px solid var(--border);
-          color: white; padding: 16px 20px; border-radius: 16px;
-          display: flex; align-items: center; gap: 15px; cursor: pointer;
-          transition: all 0.3s; width: 100%;
-        }
-        .sidebar-action:hover { background: var(--primary); transform: translateY(-3px); }
-        .sidebar-action .icon { font-size: 1.4rem; }
-        .sidebar-action .text { font-weight: 600; font-size: 1rem; }
-
-        [dir="rtl"] .settings-dropdown button { text-align: right; }
-        .settings-dropdown button:hover { background: var(--glass); color: var(--primary); }
-        
-        .nav-action-btn {
-          background: var(--glass); border: 1px solid var(--border);
-          color: white; padding: 8px 16px; border-radius: 100px;
-          cursor: pointer; display: flex; align-items: center; gap: 8px;
-          font-size: 0.85rem; font-weight: 600; transition: all 0.3s;
-        }
-        .nav-action-btn:hover { background: var(--primary); border-color: var(--primary); transform: translateY(-2px); }
-        
-        .nav-divider {
-          width: 1px; height: 20px; background: var(--border); margin: 0 10px;
-        }
-        @media (max-width: 768px) {
-          .nav-divider { width: 40px; height: 1px; margin: 10px 0; }
-        }
-
-        .night-mode-overlay {
-
-          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(255, 150, 0, 0.08);
-          pointer-events: none; z-index: 9999;
-          backdrop-filter: sepia(0.3) saturate(0.8);
-          transition: opacity 0.5s;
-        }
-
-        .tech-badge {
-          background: var(--glass); border: 1px solid var(--border);
-          padding: 10px 20px; border-radius: 12px; color: white;
-          font-weight: 600; font-size: 0.9rem; position: relative;
-          overflow: hidden; transition: all 0.3s;
-        }
-        .tech-badge:hover { transform: translateY(-5px); border-color: var(--primary); background: rgba(99, 102, 241, 0.1); }
-        .tech-level {
-          position: absolute; bottom: 0; left: 0; height: 3px;
-          background: var(--primary); opacity: 0.5;
-        }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-
-
-        .reveal-visible { opacity: 1; transform: translateY(0); }
-        
-        .section-title { fontSize: 3rem; fontWeight: 900; marginBottom: 20px; }
-        .section-sub { color: var(--text-muted); fontSize: 1.2rem; maxWidth: 700px; margin: 0 auto; }
-        
-        .contact-label { color: var(--primary); fontWeight: 700; marginBottom: 5px; }
-        .contact-value { fontSize: 1.1rem; }
-        
-        .back-to-top {
-          position: fixed; bottom: 30px; right: 30px;
-          width: 50px; height: 50px; border-radius: 50%;
-          background: var(--primary); color: white;
-          border: none; cursor: pointer; display: flex;
-          align-items: center; justify-content: center;
-          font-size: 1.5rem; opacity: 0; pointer-events: none;
-          transition: all 0.3s; z-index: 1000;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        .back-to-top.visible { opacity: 1; pointer-events: auto; }
-        .back-to-top:hover { transform: translateY(-5px); background: var(--secondary); }
-        
-        .mobile-toggle { display: none; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
-        
-        @media (max-width: 768px) {
-          .hide-mobile { display: none; }
-          .mobile-toggle { display: block; }
-          .nav-menu {
-            position: fixed; top: 72px; left: 0; right: 0;
-            background: var(--bg-dark); padding: 40px 20px;
-            border-bottom: 1px solid var(--border);
-            transform: translateY(-150%); transition: transform 0.4s;
-          }
-          .nav-menu.open { transform: translateY(0); }
-          .nav-links { flex-direction: column; gap: 20px; }
-          .section-title { font-size: 2.2rem; }
-        }
-
-        .pulse {
-          width: 8px; height: 8px; background: var(--primary); border-radius: 50%;
-          display: inline-block; position: relative; margin-right: 8px;
-        }
-        [dir="rtl"] .pulse { margin-right: 0; margin-left: 8px; }
-        .pulse::after {
-          content: ''; position: absolute; width: 100%; height: 100%;
-          background: var(--primary); border-radius: 50%;
-          animation: pulse-ring 1.5s infinite;
-        }
-        @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(3); opacity: 0; }
-        }
-        .scrolled { background: rgba(15, 23, 42, 0.9) !important; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-      `}</style>
+    <div className="social-row">
+      {SOCIAL.map((s) => (
+        <a
+          key={s.label}
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-icon"
+          aria-label={s.label}
+          style={{ color }}
+        >
+          {s.icon}
+        </a>
+      ))}
     </div>
   )
 }
 
+function PortfolioApp() {
+  useEffect(() => {
+    // Reset direction to LTR on the html element (in case old app set RTL)
+    document.documentElement.removeAttribute('dir')
+    document.documentElement.lang = 'ar' // bilingual
+
+    // Fade-in on load
+    const els = document.querySelectorAll('.fade-in')
+    requestAnimationFrame(() => {
+      els.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), i * 60)
+      })
+    })
+  }, [])
+
+  return (
+    <div className="split-root">
+
+      {/* ── SHARED NAV BAR — Centered floating pill label ── */}
+      <nav className="shared-nav">
+        <ul className="shared-nav-links">
+          <li><a href="#home-en">Home</a></li>
+          <li><a href="#skills-en">Skills</a></li>
+          <li><a href="#projects-en">Projects</a></li>
+          <li><a href="#contact-en">Contact</a></li>
+        </ul>
+      </nav>
+
+
+      {/* ── HERO IMAGE BANNER ── */}
+      <div className="hero-image-banner fade-in">
+        <img src={heroImg} alt="Yousuf Al-Maqaleh - Full Stack Developer" className="hero-banner-img" />
+      </div>
+
+      <div className="halves-row">
+
+      {/* ── LEFT HALF — English, black background, white text ── */}
+      <div className="half half-en" dir="ltr" lang="en">
+
+        {/* Hero EN */}
+        <section id="home-en" className="section hero-section fade-in">
+          <p className="role-tag">Full Stack Developer</p>
+          <h1 className="hero-name">Yousuf Al-Maqaleh</h1>
+          <p className="hero-sub">Building robust digital systems — clean code, thoughtful architecture.</p>
+          <a href="#contact-en" className="cta-btn cta-en">Get in touch</a>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* About EN */}
+        <section className="section about-section fade-in">
+          <h2 className="section-label">About</h2>
+          <p className="body-text">
+            I'm a full-stack developer based in Sana'a, Yemen, specialising in React
+            applications and Python-powered backends.
+          </p>
+          <p className="body-text" style={{ marginTop: '0.75em' }}>
+            I care about precision, performance, and creating software that genuinely
+            solves real problems.
+          </p>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Skills EN */}
+        <section id="skills-en" className="section fade-in">
+          <h2 className="section-label">Skills</h2>
+          <ul className="tags-list">
+            {SKILLS.map(s => <li key={s} className="tag tag-en">{s}</li>)}
+          </ul>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Projects EN */}
+        <section id="projects-en" className="section fade-in">
+          <h2 className="section-label">Projects</h2>
+          <div className="cards-grid">
+            {PROJECTS.map((p, i) => (
+              <a key={i} href={p.link} className="project-card card-en"
+                rel="noopener noreferrer"
+                target={p.link !== '#' ? '_blank' : undefined}>
+                <h3 className="card-title">{p.titleEn}</h3>
+                <p className="card-desc">{p.descEn}</p>
+                <span className="card-arrow">→</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Contact EN */}
+        <section id="contact-en" className="section fade-in">
+          <h2 className="section-label">Contact</h2>
+          <ul className="contact-list">
+            <li>
+              <span className="contact-type">WhatsApp</span>
+              <a href="https://wa.me/967712127541" className="contact-val contact-val-en"
+                target="_blank" rel="noopener noreferrer">
+                +967 712 127 541
+              </a>
+            </li>
+            <li>
+              <span className="contact-type">Email</span>
+              <a href="mailto:yousuf.almaqaleh@gmail.com" className="contact-val contact-val-en">
+                yousuf.almaqaleh@gmail.com
+              </a>
+            </li>
+          </ul>
+          <SocialRow color="#ffffff" />
+        </section>
+
+      </div>
+
+      {/* ── CENTER DIVIDER ── */}
+      <div className="center-line" aria-hidden="true" />
+
+      {/* ── RIGHT HALF — Arabic, white background, black text ── */}
+      <div className="half half-ar" dir="rtl" lang="ar">
+
+        {/* Hero AR */}
+        <section id="home-ar" className="section hero-section fade-in">
+          <p className="role-tag">مطور ويب متكامل</p>
+          <h1 className="hero-name">يوسف المقالح</h1>
+          <p className="hero-sub">بناء أنظمة رقمية متقنة — كود نظيف، بنية محكمة.</p>
+          <a href="#contact-ar" className="cta-btn cta-ar">تواصل معي</a>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* About AR */}
+        <section className="section about-section fade-in">
+          <h2 className="section-label">من أنا</h2>
+          <p className="body-text">
+            مطور متكامل من صنعاء، اليمن، متخصص في تطبيقات React والأنظمة الخلفية
+            المبنية بـ Python.
+          </p>
+          <p className="body-text" style={{ marginTop: '0.75em' }}>
+            أهتم بالدقة والأداء وبناء برمجيات تحل مشكلات حقيقية بفعالية.
+          </p>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Skills AR */}
+        <section id="skills-ar" className="section fade-in">
+          <h2 className="section-label">المهارات</h2>
+          <ul className="tags-list">
+            {SKILLS.map(s => <li key={s} className="tag tag-ar">{s}</li>)}
+          </ul>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Projects AR */}
+        <section id="projects-ar" className="section fade-in">
+          <h2 className="section-label">المشاريع</h2>
+          <div className="cards-grid">
+            {PROJECTS.map((p, i) => (
+              <a key={i} href={p.link} className="project-card card-ar"
+                rel="noopener noreferrer"
+                target={p.link !== '#' ? '_blank' : undefined}>
+                <h3 className="card-title">{p.titleAr}</h3>
+                <p className="card-desc">{p.descAr}</p>
+                <span className="card-arrow">←</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <hr className="section-divider" />
+
+        {/* Contact AR */}
+        <section id="contact-ar" className="section fade-in">
+          <h2 className="section-label">تواصل</h2>
+          <ul className="contact-list">
+            <li>
+              <span className="contact-type">واتساب</span>
+              <a href="https://wa.me/967712127541" className="contact-val contact-val-ar"
+                target="_blank" rel="noopener noreferrer">
+                +967 712 127 541
+              </a>
+            </li>
+            <li>
+              <span className="contact-type">البريد</span>
+              <a href="mailto:yousuf.almaqaleh@gmail.com" className="contact-val contact-val-ar">
+                yousuf.almaqaleh@gmail.com
+              </a>
+            </li>
+          </ul>
+          <SocialRow color="#000000" />
+        </section>
+
+      </div>
+      </div>
+{/* end .halves-row */}
+
+      {/* ── FOOTER — solid black, single copyright line ── */}
+      <footer className="simple-footer">
+        © 2025 MaqaTech · Yousuf Al-Maqaleh (يوسف المقالح) · All Rights Reserved | جميع الحقوق محفوظة
+      </footer>
+
+    </div>
+  )
+}
 
 export default PortfolioApp
-

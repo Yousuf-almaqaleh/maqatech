@@ -44,6 +44,6 @@ function About() {
       </section>
     </div>
   );
-}
+}غ
 
 export default About;
