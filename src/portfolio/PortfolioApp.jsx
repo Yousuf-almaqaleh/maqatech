@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import './portfolio.css'
+import Sidebar from './Sidebar'
 import heroImg from '../assets/hero-image.png'
 
 // ─── Owner Info ─────────────────────────────────────────────────────────────
@@ -31,21 +32,21 @@ const SOCIAL = [
     ),
   },
   {
-    label: 'WhatsApp',
-    href: 'https://wa.me/967712127541',
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-    ),
-  },
-  {
     label: 'GitHub',
     // UPDATE: add your GitHub link here
     href: 'https://github.com/yousuf-almaqaleh',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/967712127541',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.569 3.847 1.666 5.485l-1.121 4.092 4.148-1.089l-.204-.185zm12.39-4.83c-.301-.15-1.78-.878-2.056-.978-.275-.1-.476-.15-.676.15-.2.3-.778.978-.952 1.178-.174.2-.349.226-.65.075-.301-.15-1.27-.468-2.42-1.493-.894-.798-1.497-1.783-1.673-2.083-.175-.3-.019-.462.131-.611.135-.135.301-.35.45-.526.15-.175.2-.3.301-.5.1-.2.05-.375-.025-.525-.075-.15-.676-1.631-.926-2.235-.244-.593-.491-.512-.676-.521-.176-.008-.376-.01-.577-.01-.2 0-.526.075-.801.375-.276.3-1.052 1.026-1.052 2.502 0 1.477 1.077 2.903 1.227 3.103.15.2 2.119 3.235 5.132 4.536.716.31 1.275.495 1.71.634.718.228 1.372.196 1.888.118.576-.086 1.78-.726 2.031-1.427.25-.7.25-1.301.175-1.427-.076-.126-.276-.201-.577-.352z"/>
       </svg>
     ),
   },
@@ -106,32 +107,90 @@ function SocialRow({ color }) {
 }
 
 function PortfolioApp() {
-  useEffect(() => {
-    // Reset direction to LTR on the html element (in case old app set RTL)
-    document.documentElement.removeAttribute('dir')
-    document.documentElement.lang = 'ar' // bilingual
+  const [lang, setLang] = useState('ar') // default: Arabic
+  const [menuOpen, setMenuOpen] = useState(false)
 
-    // Fade-in on load
+  useEffect(() => {
+    document.documentElement.removeAttribute('dir')
+    document.documentElement.lang = lang
+
+    // Re-trigger fade-in on language switch
     const els = document.querySelectorAll('.fade-in')
+    els.forEach(el => el.classList.remove('visible'))
     requestAnimationFrame(() => {
       els.forEach((el, i) => {
-        setTimeout(() => el.classList.add('visible'), i * 60)
+        setTimeout(() => el.classList.add('visible'), i * 40)
       })
     })
-  }, [])
+  }, [lang])
+
+  const isAr = lang === 'ar'
+  const isEn = lang === 'en'
 
   return (
-    <div className="split-root">
+    <div className="split-root" style={{ background: isEn ? '#000' : '#fff' }}>
 
-      {/* ── SHARED NAV BAR — Centered floating pill label ── */}
+      {/* ── SHARED NAV BAR ── */}
       <nav className="shared-nav">
-        <ul className="shared-nav-links">
-          <li><a href="#home-en">Home</a></li>
-          <li><a href="#skills-en">Skills</a></li>
-          <li><a href="#projects-en">Projects</a></li>
-          <li><a href="#contact-en">Contact</a></li>
+        <ul className="shared-nav-links" dir={isAr ? 'rtl' : 'ltr'}>
+          <li><a href={isAr ? '#home-ar' : '#home-en'}>{isAr ? 'الرئيسية' : 'Home'}</a></li>
+          <li><a href={isAr ? '#skills-ar' : '#skills-en'}>{isAr ? 'المهارات' : 'Skills'}</a></li>
+          <li><a href={isAr ? '#projects-ar' : '#projects-en'}>{isAr ? 'المشاريع' : 'Projects'}</a></li>
+          <li><a href={isAr ? '#contact-ar' : '#contact-en'}>{isAr ? 'تواصل' : 'Contact'}</a></li>
+          <li className={`lang-toggle-item ${isAr ? 'lang-toggle-item-ar' : ''}`}>
+            <button
+              className={`lang-toggle ${isAr ? 'lang-toggle-ar' : 'lang-toggle-en'}`}
+              onClick={() => setLang(isAr ? 'en' : 'ar')}
+              aria-label="Toggle language"
+              title={isAr ? 'Switch to English' : 'التبديل إلى العربية'}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle', marginInlineEnd:'4px'}}>
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              {isAr ? 'EN' : 'ع'}
+            </button>
+          </li>
         </ul>
       </nav>
+
+      {/* ── MOBILE HAMBURGER ── */}
+      <button 
+        className={`mobile-hamburger ${menuOpen ? 'active' : ''}`} 
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Toggle menu"
+      >
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+      </button>
+
+      {/* ── SIDEBAR MENU (for mobile) ── */}
+      <div className={`sidebar-overlay ${menuOpen ? 'show' : ''}`} onClick={() => setMenuOpen(false)} />
+      <div className={`sidebar-container ${menuOpen ? 'sidebar-open' : ''}`}>
+         <button className="sidebar-close" onClick={() => setMenuOpen(false)}>×</button>
+         <Sidebar 
+            open={menuOpen} 
+            active={null} 
+            setActive={(id) => {
+              setMenuOpen(false);
+              const target = isAr ? `${id}-ar` : `${id}-en`;
+              const el = document.getElementById(target);
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }} 
+         />
+         {/* Language Toggle in Sidebar for mobile convenience */}
+         <div style={{padding: '20px', marginTop: 'auto'}}>
+            <button
+               className={`lang-toggle ${isAr ? 'lang-toggle-ar' : 'lang-toggle-en'}`}
+               onClick={() => { setLang(isAr ? 'en' : 'ar'); setMenuOpen(false); }}
+               style={{width: '100%', justifyContent: 'center'}}
+            >
+               {isAr ? 'Switch to English' : 'التبديل إلى الإنجليزية'}
+            </button>
+         </div>
+      </div>
 
 
       {/* ── HERO IMAGE BANNER ── */}
@@ -141,8 +200,8 @@ function PortfolioApp() {
 
       <div className="halves-row">
 
-      {/* ── LEFT HALF — English, black background, white text ── */}
-      <div className="half half-en" dir="ltr" lang="en">
+      {/* ── LEFT HALF — English ── */}
+      <div className={`half half-en ${isEn ? 'half-active' : isAr ? 'half-hidden' : ''}`} dir="ltr" lang="en">
 
         {/* Hero EN */}
         <section id="home-en" className="section hero-section fade-in">
@@ -202,9 +261,8 @@ function PortfolioApp() {
           <h2 className="section-label">Contact</h2>
           <ul className="contact-list">
             <li>
-              <span className="contact-type">WhatsApp</span>
-              <a href="https://wa.me/967712127541" className="contact-val contact-val-en"
-                target="_blank" rel="noopener noreferrer">
+              <span className="contact-type">Phone</span>
+              <a href="tel:+967712127541" className="contact-val contact-val-en">
                 +967 712 127 541
               </a>
             </li>
@@ -220,11 +278,11 @@ function PortfolioApp() {
 
       </div>
 
-      {/* ── CENTER DIVIDER ── */}
-      <div className="center-line" aria-hidden="true" />
+      {/* ── CENTER DIVIDER — only shown in split mode (neither lang is active) ── */}
+      {!isAr && !isEn && <div className="center-line" aria-hidden="true" />}
 
-      {/* ── RIGHT HALF — Arabic, white background, black text ── */}
-      <div className="half half-ar" dir="rtl" lang="ar">
+      {/* ── RIGHT HALF — Arabic ── */}
+      <div className={`half half-ar ${isAr ? 'half-active' : isEn ? 'half-hidden' : ''}`} dir="rtl" lang="ar">
 
         {/* Hero AR */}
         <section id="home-ar" className="section hero-section fade-in">
@@ -283,10 +341,9 @@ function PortfolioApp() {
           <h2 className="section-label">تواصل</h2>
           <ul className="contact-list">
             <li>
-              <span className="contact-type">واتساب</span>
-              <a href="https://wa.me/967712127541" className="contact-val contact-val-ar"
-                target="_blank" rel="noopener noreferrer">
-                +967 712 127 541
+              <span className="contact-type">الهاتف</span>
+              <a href="tel:+967712127541" className="contact-val contact-val-ar">
+                712 127 541 967+
               </a>
             </li>
             <li>
@@ -305,7 +362,11 @@ function PortfolioApp() {
 
       {/* ── FOOTER — solid black, single copyright line ── */}
       <footer className="simple-footer">
-        © 2025 MaqaTech · Yousuf Al-Maqaleh (يوسف المقالح) · All Rights Reserved | جميع الحقوق محفوظة
+        {isAr ? (
+          '© 2025 MaqaTech · يوسف المقالح · جميع الحقوق محفوظة'
+        ) : (
+          '© 2025 MaqaTech · Yousuf Al-Maqaleh · All Rights Reserved'
+        )}
       </footer>
 
     </div>
