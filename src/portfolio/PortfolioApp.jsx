@@ -24,7 +24,7 @@ const SOCIAL = [
   {
     label: 'Instagram',
     // UPDATE: add your Instagram link here
-    href: 'https://instagram.com/yousuf.almaqaleh',
+    href: 'https://www.instagram.com/maqatech.tech?igsh=MWM1ZWF2aTZ2bDU0ag==',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
@@ -53,35 +53,55 @@ const SOCIAL = [
 ]
 
 // UPDATE: Replace '#' with your real project URLs
-const PROJECTS = [
+const PROJECT_CATEGORIES = [
   {
-    titleAr: 'نظام إدارة العيادات الذكي',
-    titleEn: 'Smart Clinic System',
-    descAr: 'حل متكامل لإدارة المرضى والمواعيد والتقارير الطبية بدقة عالية.',
-    descEn: 'Integrated patient management, appointments, and medical reporting built with Python and SQL.',
-    link: '#', // UPDATE: add your project link here
+    titleAr: 'أنظمة مكتبية وسرفرات',
+    titleEn: 'Desktop Systems & Servers',
+    projects: [
+      {
+        id: 'clinic-system',
+        titleAr: 'نظام إدارة العيادات والمراكز الصحية',
+        titleEn: 'Clinic & Health Centers Management System',
+        descAr: 'حل متكامل لإدارة المرضى والمواعيد والتقارير الطبية بدقة عالية.',
+        descEn: 'Integrated patient management, appointments, and medical reporting built with Python and SQL.',
+        link: 'https://alex-proj-dent.onrender.com/public_booking/',
+        featuresAr: [
+          'أتمتة العمليات الطبية وتحسين تجربة المريض.',
+          'قسم المعامل المتكامل (Laboratory Management).',
+          'إدارة المخازن والمستلزمات الطبية (Stores Control).',
+          'الفوترة والحسابات المالية والتقارير.',
+          'سجل شامل للمرضى وتاريخهم الطبي.'
+        ],
+        featuresEn: [
+          'Medical process automation & patient experience improvement.',
+          'Integrated Laboratory Management Department.',
+          'Inventory Control & Medical Stores Management.',
+          'Financial Accounting, Billing & Advanced Reporting.',
+          'Comprehensive Patient Records & Medical History.'
+        ]
+      },
+    ]
   },
   {
-    titleAr: 'منصة MaqaTech للتجارة',
-    titleEn: 'MaqaTech Commerce',
-    descAr: 'متجر إلكتروني متكامل يدعم الدفع والتحكم في المخزون وتجربة مستخدم سلسة.',
-    descEn: 'Full-featured e-commerce platform with payments, inventory control, and seamless UX.',
-    link: '#', // UPDATE: add your project link here
-  },
-  {
-    titleAr: 'تطبيق إدارة الموارد',
-    titleEn: 'Resource Management App',
-    descAr: 'نظام داخلي لتتبع الأصول والموارد البشرية وتحليل الأداء.',
-    descEn: 'Internal system for tracking assets, human resources, and performance analytics.',
-    link: '#', // UPDATE: add your project link here
-  },
-  {
-    titleAr: 'بوابة الخدمات الإلكترونية',
-    titleEn: 'E-Services Portal',
-    descAr: 'منصة ويب تتيح للمستخدمين الوصول إلى الخدمات الرقمية بسهولة وأمان.',
-    descEn: 'Web platform providing users with easy and secure access to digital services.',
-    link: '#', // UPDATE: add your project link here
-  },
+    titleAr: 'منصات ومواقع ويب',
+    titleEn: 'Platforms & Websites',
+    projects: [
+      {
+        titleAr: 'منصة MaqaTech للتجارة',
+        titleEn: 'MaqaTech Commerce',
+        descAr: 'متجر إلكتروني متكامل يدعم الدفع والتحكم في المخزون وتجربة مستخدم سلسة.',
+        descEn: 'Full-featured e-commerce platform with payments, inventory control, and seamless UX.',
+        link: '#',
+      },
+      {
+        titleAr: 'بوابة الخدمات الإلكترونية',
+        titleEn: 'E-Services Portal',
+        descAr: 'منصة ويب تتيح للمستخدمين الوصول إلى الخدمات الرقمية بسهولة وأمان.',
+        descEn: 'Web platform providing users with easy and secure access to digital services.',
+        link: '#',
+      },
+    ]
+  }
 ]
 
 const SKILLS = ['React', 'Python', 'HTML', 'CSS', 'JavaScript']
@@ -109,6 +129,7 @@ function SocialRow({ color }) {
 function PortfolioApp() {
   const [lang, setLang] = useState('ar') // default: Arabic
   const [menuOpen, setMenuOpen] = useState(false)
+  const [expandedId, setExpandedId] = useState(null)
 
   useEffect(() => {
     document.documentElement.removeAttribute('dir')
@@ -205,8 +226,8 @@ function PortfolioApp() {
         <section className="section about-section fade-in">
           <h2 className="section-label">About</h2>
           <p className="body-text">
-            I'm a full-stack developer based in Sana'a, Yemen, specialising in React
-            applications and Python-powered backends.
+            I'm a full-stack developer and a graduate of the Faculty of Computing at Sana'a University, 
+            specialising in React applications and Python-powered backends.
           </p>
           <p className="body-text" style={{ marginTop: '0.75em' }}>
             I care about precision, performance, and creating software that genuinely
@@ -224,25 +245,76 @@ function PortfolioApp() {
           </ul>
         </section>
 
-        <hr className="section-divider" />
 
         {/* Projects EN */}
         <section id="projects-en" className="section fade-in">
           <h2 className="section-label">Projects</h2>
-          <div className="cards-grid">
-            {PROJECTS.map((p, i) => (
-              <a key={i} href={p.link} className="project-card card-en"
-                rel="noopener noreferrer"
-                target={p.link !== '#' ? '_blank' : undefined}>
-                <h3 className="card-title">{p.titleEn}</h3>
-                <p className="card-desc">{p.descEn}</p>
-                <span className="card-arrow">→</span>
-              </a>
-            ))}
-          </div>
+          {PROJECT_CATEGORIES.map((cat, idx) => (
+            <div key={idx} className="project-category-wrap">
+              {idx > 0 && <hr className="section-divider" style={{ margin: '40px 0' }} />}
+              <h3 className="project-category-title">{cat.titleEn}</h3>
+              <div className="cards-grid">
+                {cat.projects.map((p, i) => {
+                  const isExpanded = expandedId === p.id;
+                  const features = isAr ? p.featuresAr : p.featuresEn;
+                  
+                  return (
+                    <div key={i} className={`project-card-container ${isExpanded ? 'is-expanded' : ''}`}>
+                      <button 
+                        className={`project-card card-en`}
+                        onClick={() => p.featuresAr ? setExpandedId(isExpanded ? null : p.id) : null}
+                        role="button"
+                        aria-expanded={isExpanded}
+                      >
+                        <div className="card-top-row">
+                          <h4 className="card-title">{p.titleEn}</h4>
+                          {p.link && p.link !== '#' && (
+                            <a 
+                              href={p.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="free-trial-tag-inline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              Free Trial
+                            </a>
+                          )}
+                        </div>
+                        <p className="card-desc">{p.descEn}</p>
+                        {p.featuresAr && (
+                           <span className={`card-toggle-text ${isExpanded ? 'active' : ''}`}>
+                             More
+                           </span>
+                        )}
+                      </button>
+                      
+                      {isExpanded && features && (
+                        <div className="project-details fade-in visible">
+                          <ul className="features-list">
+                            {features.map((feat, fi) => (
+                              <li key={fi}>{feat}</li>
+                            ))}
+                          </ul>
+                          {p.link && p.link !== '#' && (
+                            <a 
+                              href={p.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="project-cta-btn"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              Try Live Demo →
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </section>
-
-        <hr className="section-divider" />
 
         {/* Contact EN */}
         <section id="contact-en" className="section fade-in">
@@ -286,7 +358,7 @@ function PortfolioApp() {
         <section className="section about-section fade-in">
           <h2 className="section-label">من أنا</h2>
           <p className="body-text">
-            مطور متكامل من صنعاء، اليمن، متخصص في تطبيقات React والأنظمة الخلفية
+            مطور متكامل وخريج كلية الحاسوب من جامعة صنعاء، متخصص في تطبيقات React والأنظمة الخلفية
             المبنية بـ Python.
           </p>
           <p className="body-text" style={{ marginTop: '0.75em' }}>
@@ -304,25 +376,77 @@ function PortfolioApp() {
           </ul>
         </section>
 
-        <hr className="section-divider" />
 
         {/* Projects AR */}
         <section id="projects-ar" className="section fade-in">
           <h2 className="section-label">المشاريع</h2>
-          <div className="cards-grid">
-            {PROJECTS.map((p, i) => (
-              <a key={i} href={p.link} className="project-card card-ar"
-                rel="noopener noreferrer"
-                target={p.link !== '#' ? '_blank' : undefined}>
-                <h3 className="card-title">{p.titleAr}</h3>
-                <p className="card-desc">{p.descAr}</p>
-                <span className="card-arrow">←</span>
-              </a>
-            ))}
-          </div>
+          {PROJECT_CATEGORIES.map((cat, idx) => (
+            <div key={idx} className="project-category-wrap">
+              {idx > 0 && <hr className="section-divider" style={{ margin: '40px 0' }} />}
+              <h3 className="project-category-title">{cat.titleAr}</h3>
+              <div className="cards-grid">
+                {cat.projects.map((p, i) => {
+                  const isExpanded = expandedId === p.id;
+                  const features = isAr ? p.featuresAr : p.featuresEn;
+
+                  return (
+                    <div key={i} className={`project-card-container ${isExpanded ? 'is-expanded' : ''}`}>
+                      <button 
+                        className={`project-card card-ar`}
+                        onClick={() => p.featuresAr ? setExpandedId(isExpanded ? null : p.id) : null}
+                        role="button"
+                        aria-expanded={isExpanded}
+                      >
+                        <div className="card-top-row">
+                          <h4 className="card-title">{p.titleAr}</h4>
+                          {p.link && p.link !== '#' && (
+                            <a 
+                              href={p.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="free-trial-tag-inline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              تجربة مجانية
+                            </a>
+                          )}
+                        </div>
+                        <p className="card-desc">{p.descAr}</p>
+                        {p.featuresAr && (
+                           <span className={`card-toggle-text ${isExpanded ? 'active' : ''}`}>
+                             المزيد
+                           </span>
+                        )}
+                      </button>
+
+                      {isExpanded && features && (
+                        <div className="project-details fade-in visible">
+                          <ul className="features-list">
+                            {features.map((feat, fi) => (
+                              <li key={fi}>{feat}</li>
+                            ))}
+                          </ul>
+                          {p.link && p.link !== '#' && (
+                            <a 
+                              href={p.link} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="project-cta-btn"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              تجربة النظام ←
+                            </a>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          ))}
         </section>
 
-        <hr className="section-divider" />
 
         {/* Contact AR */}
         <section id="contact-ar" className="section fade-in">
