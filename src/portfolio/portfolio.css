@@ -49,6 +49,8 @@ body {
   align-items: flex-end;
   overflow: hidden;
   /* Seamlessly flows from nav into the split columns */
+  border-bottom: 1.5px solid #ffd864; /* Thin golden line */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle glow effect */
 }
 
 .hero-banner-img {
@@ -162,8 +164,8 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  justify-content: center; /* Center text */
+  padding: 12px 16px;
   font-size: 1rem;
   cursor: pointer;
   border-radius: 8px;
@@ -186,12 +188,13 @@ body {
 }
 
 .sidebar-section-label {
-  color: #666;
+  color: #999;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 10px;
-  padding-left: 12px;
+  text-align: center; /* Center alignment */
+  padding: 0;
 }
 
 /* ════════════════════════════════════════════════════════════

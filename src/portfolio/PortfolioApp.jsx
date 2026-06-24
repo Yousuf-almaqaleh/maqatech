@@ -144,11 +144,6 @@ function PortfolioApp() {
               aria-label="Toggle language"
               title={isAr ? 'Switch to English' : 'التبديل إلى العربية'}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{verticalAlign:'middle', marginInlineEnd:'4px'}}>
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="2" y1="12" x2="22" y2="12"/>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
               {isAr ? 'EN' : 'ع'}
             </button>
           </li>
@@ -169,27 +164,20 @@ function PortfolioApp() {
       {/* ── SIDEBAR MENU (for mobile) ── */}
       <div className={`sidebar-overlay ${menuOpen ? 'show' : ''}`} onClick={() => setMenuOpen(false)} />
       <div className={`sidebar-container ${menuOpen ? 'sidebar-open' : ''}`}>
-         <button className="sidebar-close" onClick={() => setMenuOpen(false)}>×</button>
          <Sidebar 
             open={menuOpen} 
             active={null} 
+            isAr={isAr}
+            setLang={setLang}
             setActive={(id) => {
-              setMenuOpen(false);
-              const target = isAr ? `${id}-ar` : `${id}-en`;
-              const el = document.getElementById(target);
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              if (id) {
+                setMenuOpen(false);
+                const target = isAr ? `${id}-ar` : `${id}-en`;
+                const el = document.getElementById(target);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }
             }} 
          />
-         {/* Language Toggle in Sidebar for mobile convenience */}
-         <div style={{padding: '20px', marginTop: 'auto'}}>
-            <button
-               className={`lang-toggle ${isAr ? 'lang-toggle-ar' : 'lang-toggle-en'}`}
-               onClick={() => { setLang(isAr ? 'en' : 'ar'); setMenuOpen(false); }}
-               style={{width: '100%', justifyContent: 'center'}}
-            >
-               {isAr ? 'Switch to English' : 'التبديل إلى الإنجليزية'}
-            </button>
-         </div>
       </div>
 
 
